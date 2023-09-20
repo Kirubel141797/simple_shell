@@ -1,0 +1,31 @@
+cd: cd [-L|[-P [-e]] [-@]] [dir]
+
+Change the shell working directory.
+
+Summary
+cd [-L|[-P [-e]] [-@]] [dir]
+This line shows the syntax of how to use the cd command, outlining the available options and indicating that you can specify a directory to change to.
+Description
+The next several paragraphs explain how the cd command works:
+Changing the current directory to DIR. If DIR is not specified, it defaults to the value of the HOME shell variable, which usually is the home directory of the current user.
+The CDPATH variable can define a search path for directories, which allows you to change to directories more easily without specifying the full path.
+If the cdable_vars shell option is set, and a directory is not found, bash assumes DIR is a variable name and tries to use its value as the directory to change to.
+How the -L and -P options affect the resolution of symbolic links in the path to the directory.
+The -e option which can be used with -P to exit with a non-zero status if the current working directory cannot be determined.
+The -@ option can be used on systems that support it to present a file with extended attributes as a directory containing those attributes.
+Options
+This part explains the available options in detail:
+-L: forces the shell to follow symbolic links and resolves symbolic links in DIR after processing instances of ...
+-P: uses the physical directory structure without following symbolic links and resolves symbolic links in DIR before processing instances of ...
+-e: used with -P, it makes the shell exit with a non-zero status if the current working directory cannot be determined.
+-@: on supported systems, it allows you to present a file with extended attributes as a directory containing those attributes.
+Exit Status
+This section explains the possible exit statuses of the cd command:
+0: The directory was changed successfully, and if -P was used, $PWD was set successfully.
+Non-zero: An error occurred, such as the directory not being found or another error condition being met.
+Practical Examples
+To give you a better understanding, here are some practical examples:
+cd /etc                 # change directory to /etc
+cd ..                   # move one directory up (to the parent directory)
+cd -L /path/to/directory # change directory following symbolic links
+cd -P /path/to/directory # change directory without following symbolic links
