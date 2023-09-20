@@ -1,0 +1,23 @@
+echo: Use echo [options] [arguments...] to display the given arguments on the screen.
+This command outputs its arguments to the console. It places a single space between each argument and typically ends the output with a newline.
+Options:
+-n: Skip adding a newline at the end of the output.
+-e: Allows the use of special escape sequences in the arguments.
+-E: Disables the special interpretation of escape sequences.
+Escape sequences recognized by echo:
+\a: Produces a bell sound.
+\b: Acts as a backspace.
+\c: Halts any further output.
+\e & \E: Represents the escape character.
+\f: Triggers a form feed.
+\n: Begins a new line.
+\r: Initiates a carriage return.
+\t: Inserts a horizontal tab.
+\v: Places a vertical tab.
+\\: Outputs a backslash.
+\0nnn: Displays the character represented by the octal value NNN, where NNN is 0-3 octal digits.
+\xHH: Outputs the character corresponding to the 8-bit hexadecimal value HH. HH can be 1 or 2 hex digits.
+\uHHHH: Represents the Unicode character with the hex value HHHH. HHHH can range from 1 to 4 hex digits.
+\UHHHHHHHH: Symbolizes the Unicode character defined by the hex value HHHHHHHH. This value can be between 1 to 8 hex digits.
+Return Status:
+The command is successful unless there's an issue writing the output.
