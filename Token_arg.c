@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- *token_arg - A tokenization of a command line string
+ *token_arg - A tokenizations of a command line strings
  *@_str: A string created with input from command line
  *
  *Return: An arguments, pointer of a pointer
