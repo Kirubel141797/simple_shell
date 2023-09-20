@@ -91,16 +91,16 @@ char *_strdup(char *str)
  */
 char *str_concat(char *s1, char *s2)
 {
-	int l = 0, j = 0, k = 0, l = 0;
+	int x = 0, j = 0, k = 0, l = 0;
 	char *t;
 
 	if (s1 == NULL)
 		s1 = "";
 	if (s2 == NULL)
 		s2 = "";
-	while (s1[l])
+	while (s1[x])
 	{
-		l++;
+		x++;
 	}
 	while (s2[j])
 	{
