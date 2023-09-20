@@ -9,17 +9,17 @@
  */
 int _strcmp(char *s1, char *s2)
 {
-	int x, j, a, b;
+	int l, j, a, b;
 
-	x = 0;
+	l = 0;
 
-	while (s1[x] == s2[x] && s1[x] != '\0' && s2[x] != '\0')
+	while (s1[l] == s2[l] && s1[l] != '\0' && s2[l] != '\0')
 	{
 		/*printf("got into the _strcmp cycle");*/
-		x++;
+		l++;
 	}
-	a = (s1[x] - '0');
-	b = (s2[x] - '0');
+	a = (s1[l] - '0');
+	b = (s2[l] - '0');
 	j = a - b;
 
 	return (j);

@@ -8,7 +8,7 @@
   */
 int _printf(const char *format, ...)
 {
-	int x = 0, res = 0, length = 0;
+	int l = 0, res = 0, len = 0;
 	int *ptr;
 	va_list toPrint;
 
@@ -16,14 +16,14 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
-	ptr = &legthn;
+	ptr = &len;
 	va_start(toPrint, format);
 
-	while (format && format[x])
+	while (format && format[l])
 	{
-		if (format[x] == '%')
+		if (format[l] == '%')
 		{
-			res = funper(format, x, toPrint, ptr);
+			res = funper(format, l, toPrint, ptr);
 			if (res == -1)
 			{
 				return (-1);
@@ -31,19 +31,19 @@ int _printf(const char *format, ...)
 			if (!res)
 			{
 				va_end(toPrint);
-				return (length);
+				return (len);
 			}
-			x += res;
+			l += res;
 			continue;
 
 		}
 		else
 		{
-			 _putchar(format[x], ptr);
+			 _putchar(format[l], ptr);
 		}
-		x++;
+		l++;
 	}
 	va_end(toPrint);
-	return (length);
+	return (len);
 }
 

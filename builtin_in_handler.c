@@ -9,20 +9,20 @@
   */
 int built_in_handler(char **_args, char **env)
 {
-	int x = 0;
+	int l = 0;
 	tpe_bui arr_bu[] = {
 		{"cd", fun_cd		},
 		{"pwd", fun_pwd		},
 		{"exit", fun_exit	},
 		{"env", fun_envi	}
 	};
-	for (; x < 4; x++)
-		if (_strcmp(arr_bu[x].s, _args[0]) == 0)
+	for (; l < 4; l++)
+		if (_strcmp(arr_bu[l].s, _args[0]) == 0)
 		{
-			if (_strcmp(arr_bu[x].s, "env") == 0)
-				return (arr_bu[x].fun(env));
+			if (_strcmp(arr_bu[l].s, "env") == 0)
+				return (arr_bu[l].fun(env));
 			else
-				return (arr_bu[x].fun(_args));
+				return (arr_bu[l].fun(_args));
 		}
 	return (1);
 

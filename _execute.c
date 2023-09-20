@@ -11,10 +11,10 @@
  */
 int exec_fun(int *cicles, char  **_args, char **av, char **env)
 {
-	int x;
+	int l;
 	char *_build_do[] = {"cd", "pwd", "exit", "env"};
 
-	for (x = 0; x < 4; x++)
+	for (l = 0; l < 4; l++)
 	{
 		if (_strcmp(_args[0], _build_do[l]) == 0)
 		{

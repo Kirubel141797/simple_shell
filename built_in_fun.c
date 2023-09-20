@@ -50,12 +50,12 @@ int fun_exit(char **_args)
   */
 int fun_envi(char **env)
 {
-	int x = 0;
+	int l = 0;
 
-	while (env[x])
+	while (env[l])
 	{
-		_printf("%s\n", env[x]);
-		x++;
+		_printf("%s\n", env[l]);
+		l++;
 	}
 
 	return (1);
