@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  *main - a function to control a shell process
  *@ac:main argument, number of arguments
@@ -9,7 +8,6 @@
  *
  *Return: 0 on success
  */
-
 
 int main(int ac, char **av, char **env)
 {
@@ -35,7 +33,6 @@ int main(int ac, char **av, char **env)
 				_str = NULL;
 				_args = NULL;
 
-
 				if (kill_is && _report != 0)
 					_printf("#cisfun$ ");
 				cicles++;
@@ -44,9 +41,7 @@ int main(int ac, char **av, char **env)
 		else if (kill_is != 0)
 			_printf("#cisfun$ ");
 
-
 	}
-
 
 	if (kill_is && _report != 0)
 		_printf("\n");
@@ -55,7 +50,6 @@ int main(int ac, char **av, char **env)
 	ac = ac;
 	return (0);
 }
-
 
 /**
   *fun_count - count a letter in a string
@@ -66,7 +60,6 @@ int main(int ac, char **av, char **env)
 int fun_count(char *s)
 {
 	int l = 0, cont = 0;
-
 
 	while (s[l])
 	{
