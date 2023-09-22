@@ -1,72 +1,73 @@
-#include "shell.h"
+#include "main.h"
 
 /**
- *main - a function to control a shell process
- *@ac:main argument, number of arguments
- *@av:main argument, array of arguments
- *@env:main argument, environmental variable
+ * free_data - free data structure
  *
- *Return: 0 on success
+ * @datash: data structure
+ * Return: no return
  */
-
-int main(int ac, char **av, char **env)
+void free_data(data_shell *datash)
 {
-	char *_str = NULL, *no_command = "\n";
-	char **_args = NULL;
-	int _report = 1, kill_is = 0, cicles = 1;
-	size_t _size_str;
+	unsigned int x;
 
-
-	kill_is = isatty(STDIN_FILENO);
-	if (kill_is)
-		_printf("#cisfun$ ");
-	while (_report && (getline(&_str, &_size_str, stdin) != EOF))
+	for (x = 0; datash->_environ[x]; x++)
 	{
-		if (fun_count(_str) > 0)
-		{
-			if (_strcmp(_str, no_command) != 0)
-			{
-				_args = token_arg(_str);
-				_report = exec_fun(&cicles, _args, av, env);
-				free(_str);
-				free(_args);
-				_str = NULL;
-				_args = NULL;
-
-				if (kill_is && _report != 0)
-					_printf("#cisfun$ ");
-				cicles++;
-			}
-		}
-		else if (kill_is != 0)
-			_printf("#cisfun$ ");
-
+		free(datash->_environ[x]);
 	}
 
-	if (kill_is && _report != 0)
-		_printf("\n");
-	free(_str);
-	free(_args);
-	ac = ac;
-	return (0);
+	free(datash->_environ);
+	free(datash->pid);
 }
 
 /**
-  *fun_count - count a letter in a string
-  *@s:a string to be evaluated
-  *
-  *Return: number of letters
-  */
-int fun_count(char *s)
+ * set_data - Inititiate data structure
+ *
+ * @datash: data structure
+ * @av: argument vector
+ * Return: no return
+ */
+void set_data(data_shell *datash, char **av)
 {
-	int l = 0, cont = 0;
+	unsigned int x;
 
-	while (s[l])
+	datash->av = av;
+	datash->input = NULL;
+	datash->args = NULL;
+	datash->status = 0;
+	datash->counter = 1;
+
+	for (x = 0; environ[i]; x++)
+		;
+
+	datash->_environ = malloc(sizeof(char *) * (x + 1));
+
+	for (x = 0; environ[x]; x++)
 	{
-		if (s[l] != ' ' && s[l] != '\t' && s[l] != '\n')
-			cont++;
-		l++;
+		datash->_environ[x] = _strdup(environ[x]);
 	}
-	return (cont);
+
+	datash->_environ[i] = NULL;
+	datash->pid = aux_itoa(getpid());
 }
 
+/**
+ * main - Entry point
+ *
+ * @ac: argument count
+ * @av: argument vector
+ *
+ * Return: 0 on success.
+ */
+int main(int ac, char **av)
+{
+	data_shell datas;
+	(void) ac;
+
+	signal(SIGINT, get_sigint);
+	set_data(&datas, av);
+	shell_loop(&datas);
+	free_data(&datas);
+	if (datas.status < 0)
+		return (255);
+	return (datas.status);
+}
