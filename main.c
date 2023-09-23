@@ -1,73 +1,45 @@
-#include "main.h"
+
+#include "shell.h"
 
 /**
- * free_data - free data structure
+ * main - entry point
+ * @ac: arg count
+ * @av: arg vector
  *
- * @datash: data structure
- * Return: no return
- */
-void free_data(data_shell *datash)
-{
-	unsigned int x;
-
-	for (x = 0; datash->_environ[x]; x++)
-	{
-		free(datash->_environ[x]);
-	}
-
-	free(datash->_environ);
-	free(datash->pid);
-}
-
-/**
- * set_data - Inititiate data structure
- *
- * @datash: data structure
- * @av: argument vector
- * Return: no return
- */
-void set_data(data_shell *datash, char **av)
-{
-	unsigned int x;
-
-	datash->av = av;
-	datash->input = NULL;
-	datash->args = NULL;
-	datash->status = 0;
-	datash->counter = 1;
-
-	for (x = 0; environ[i]; x++)
-		;
-
-	datash->_environ = malloc(sizeof(char *) * (x + 1));
-
-	for (x = 0; environ[x]; x++)
-	{
-		datash->_environ[x] = _strdup(environ[x]);
-	}
-
-	datash->_environ[i] = NULL;
-	datash->pid = aux_itoa(getpid());
-}
-
-/**
- * main - Entry point
- *
- * @ac: argument count
- * @av: argument vector
- *
- * Return: 0 on success.
+ * Return: 0 on success, 1 on error
  */
 int main(int ac, char **av)
 {
-	data_shell datas;
-	(void) ac;
+	info_i info[] = { INFO_INIT };
+	int fd = 2;
 
-	signal(SIGINT, get_sigint);
-	set_data(&datas, av);
-	shell_loop(&datas);
-	free_data(&datas);
-	if (datas.status < 0)
-		return (255);
-	return (datas.status);
+	asm ("mov %1, %0\n\t"
+		"add $3, %0"
+		: "=r" (fd)
+		: "r" (fd));
+
+	if (ac == 2)
+	{
+		fd = open(av[1], O_RDONLY);
+		if (fd == -1)
+		{
+			if (errno == EACCES)
+				exit(126);
+			if (errno == ENOENT)
+			{
+				_eputs(av[0]);
+				_eputs(": 0: Can't open ");
+				_eputs(av[1]);
+				_eputchar('\n');
+				_eputchar(BUF_FLUSH);
+				exit(127);
+			}
+			return (EXIT_FAILURE);
+		}
+		info->readfd = fd;
+	}
+	populate_env_list(info);
+	read_history(info);
+	hsh(info, av);
+	return (EXIT_SUCCESS);
 }
