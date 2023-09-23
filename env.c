@@ -21,7 +21,7 @@ int _myenv(info_i *info)
  */
 char *_getenv(info_i *info, const char *name)
 {
-	list_t *node = info->env;
+	list_i *node = info->env;
 	char *p;
 
 	while (node)
@@ -69,7 +69,7 @@ int _myunsetenv(info_i *info)
 		return (1);
 	}
 	for (x = 1; x <= info->argc; x++)
-		_unsetenv(info, info->argv[i]);
+		_unsetenv(info, info->argv[x]);
 
 	return (0);
 }

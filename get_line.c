@@ -97,7 +97,7 @@ ssize_t get_input(info_i *info)
  *
  * Return: r
  */
-ssize_t read_buf(info_t *info, char *buf, size_t *i)
+ssize_t read_buf(info_i *info, char *buf, size_t *i)
 {
 	ssize_t t = 0;
 
@@ -132,7 +132,7 @@ int _getline(info_i *info, char **ptr, size_t *length)
 		x = len = 0;
 
 	t = read_buf(info, buf, &len);
-	if (t == -1 || (r == 0 && len == 0))
+	if (t == -1 || (t == 0 && len == 0))
 		return (-1);
 
 	c = _strchr(buf + x, '\n');
